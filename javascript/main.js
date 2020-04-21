@@ -20,7 +20,7 @@ document.querySelector(".js-go").addEventListener('click',function(){
   
   /*  do the data stuff with the API */
   
-  let url = "http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=ZAd6aovRHeYipG1aFkbktOKjR94kRvHK";
+  let url = "http://api.giphy.com/v1/gifs/search?q=funny+dog&api_key=ZAd6aovRHeYipG1aFkbktOKjR94kRvHK";
   
   // AJAX Request
   let GiphyAJAXCall = new XMLHttpRequest();
@@ -40,11 +40,13 @@ document.querySelector(".js-go").addEventListener('click',function(){
   function pushToDOM(input) {
 
     let response = JSON.parse(input);
+    let imageUrls =response.data
   
-    let imageUrl = response.data[2].images.fixed_height.url;
-    console.log(imageUrl);
-  
-    let container = document.querySelector(".js-container");
-    container.innerHTML = "<img src=\"" + imageUrl + "\">";
+   imageUrls.forEach(function(image){
+     let src = image.images.fixed_height.url;
+
+     let container = document.querySelector(".js-container");
+     container.innerHTML += "<img src=\"" + src + "\" class=\"container-image\">";
+   });
   
   }
